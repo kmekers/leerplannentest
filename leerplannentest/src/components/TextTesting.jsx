@@ -1,16 +1,7 @@
 import { useState } from 'react';
-import { models } from '../config/models';
-import { prompts } from '../config/prompts';
+import { models, prompts } from '../config/config';
 import ReactMarkdown from 'react-markdown';
-
-function LoadingSpinner() {
-  return (
-    <div className="loading-spinner">
-      <div className="spinner-ring"></div>
-      <div className="spinner-text">Processing text...</div>
-    </div>
-  );
-}
+import LoadingSpinner from './LoadingSpinner';
 
 function TextTesting() {
   const [prompt, setPrompt] = useState('');
@@ -19,27 +10,52 @@ function TextTesting() {
 
   const handleTest = async (modelId) => {
     setLoading(prev => ({ ...prev, [modelId]: true }));
+    console.log('Testing model:', modelId);
     
-    if (modelId === 'geitje') {
+    if (modelId === 'geitje' || modelId === 'fietje' || modelId === 'nemo') {
       try {
+        const modelConfig = {
+          geitje: {
+            name: 'bramvanroy/geitje-7b-ultra:f16',
+            prompt: prompts.testgeitje
+          },
+          fietje: {
+            name: 'bramvanroy/fietje-2b-chat:f16',
+            prompt: prompts.testfietje
+          },
+          nemo: {
+            name: 'mistral-nemo:latest',
+            prompt: prompts.testnemo
+          }
+        };
+
+        const config = modelConfig[modelId];
+        console.log('Using config:', config);
+        
+        const requestBody = {
+          model: config.name,
+          prompt: config.prompt.system + '\n\n' + config.prompt.task + '\n\nLes:\n' + prompt,
+          stream: false
+        };
+        console.log('Request body:', requestBody);
+
         const response = await fetch('http://localhost:11434/api/generate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            model: 'bramvanroy/geitje-7b-ultra:f16',
-            prompt: prompts.testgeitje.system + '\n\n' + prompts.testgeitje.task + '\n\nLes:\n' + prompt,
-            stream: false
-          }),
+          body: JSON.stringify(requestBody),
         });
 
         const data = await response.json();
+        console.log('Response:', data);
+        
         setResponses(prev => ({
           ...prev,
           [modelId]: data.response
         }));
       } catch (error) {
+        console.error('Error with model:', modelId, error);
         setResponses(prev => ({
           ...prev,
           [modelId]: 'Error: ' + error.message
@@ -86,7 +102,7 @@ function TextTesting() {
               </div>
               <div className="response-area">
                 {loading[model.id] ? (
-                  <LoadingSpinner />
+                  <LoadingSpinner text="Processing text..." />
                 ) : responses[model.id] ? (
                   <div className="markdown-content">
                     <ReactMarkdown>{responses[model.id]}</ReactMarkdown>

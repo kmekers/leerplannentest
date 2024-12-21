@@ -1,17 +1,8 @@
 import { useState } from 'react';
 import { BsImageFill } from 'react-icons/bs';
 import ReactMarkdown from 'react-markdown';
-import { models } from '../config/models';
-import { prompts } from '../config/prompts';
-
-function LoadingSpinner() {
-  return (
-    <div className="loading-spinner">
-      <div className="spinner-ring"></div>
-      <div className="spinner-text">Analyzing image...</div>
-    </div>
-  );
-}
+import { models, prompts } from '../config/config';
+import LoadingSpinner from './LoadingSpinner';
 
 function ImageTesting() {
   const [responses, setResponses] = useState({});
@@ -24,29 +15,43 @@ function ImageTesting() {
     if (modelId === 'llama31') {
       try {
         const reader = new FileReader();
-        reader.onload = async () => {
-          const base64Image = reader.result.split(',')[1];
-          
-          const response = await fetch('http://localhost:11434/api/generate', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              model: models.image[0].modelId,
-              prompt: prompts.llama31.system + '\n\n' + prompts.llama31.task,
-              images: [base64Image],
-              stream: false
-            }),
-          });
+        
+        const processImage = () => {
+          return new Promise((resolve, reject) => {
+            reader.onload = async () => {
+              try {
+                const base64Image = reader.result.split(',')[1];
+                const model = models.image.find(m => m.id === modelId);
+                
+                const response = await fetch('http://localhost:11434/api/generate', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    model: model.modelId,
+                    prompt: prompts.llama31.system + '\n\n' + prompts.llama31.task,
+                    images: [base64Image],
+                    stream: false
+                  }),
+                });
 
-          const data = await response.json();
-          setResponses(prev => ({
-            ...prev,
-            [modelId]: data.response
-          }));
+                const data = await response.json();
+                resolve(data);
+              } catch (error) {
+                reject(error);
+              }
+            };
+            reader.onerror = () => reject(new Error('Failed to read file'));
+            reader.readAsDataURL(selectedFile);
+          });
         };
-        reader.readAsDataURL(selectedFile);
+
+        const data = await processImage();
+        setResponses(prev => ({
+          ...prev,
+          [modelId]: data.response
+        }));
       } catch (error) {
         setResponses(prev => ({
           ...prev,
@@ -121,7 +126,7 @@ function ImageTesting() {
               </div>
               <div className="response-area">
                 {loading[model.id] ? (
-                  <LoadingSpinner />
+                  <LoadingSpinner text="Analyzing image..." />
                 ) : responses[model.id] ? (
                   <div className="markdown-content">
                     <ReactMarkdown>{responses[model.id]}</ReactMarkdown>
