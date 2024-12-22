@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { BsFiletypePdf } from 'react-icons/bs';
+import { FaFileUpload } from 'react-icons/fa';
+import { config } from '../config/config';
 import ReactMarkdown from 'react-markdown';
-import { models, CLAUDE_API_KEY } from '../config/config';
-import LoadingSpinner from './LoadingSpinner';
 
 function PdfTesting() {
   const [responses, setResponses] = useState({});
@@ -23,12 +22,12 @@ function PdfTesting() {
               try {
                 console.log('PDF loaded, converting to base64...');
                 const base64Pdf = reader.result.split(',')[1];
-                const model = models.pdf.find(m => m.id === modelId);
+                const model = config.pdf.find(m => m.id === modelId);
                 console.log('Using model:', model);
                 
                 await new Promise(resolve => setTimeout(resolve, 1000));
 
-                if (!CLAUDE_API_KEY) {
+                if (!config.anthropicApiKey) {
                   console.error('API Key missing or undefined');
                   throw new Error('API key is not configured. Please check your .env file.');
                 }
@@ -38,7 +37,7 @@ function PdfTesting() {
                 const response = await fetch('https://api.anthropic.com/v1/messages', {
                   method: 'POST',
                   headers: {
-                    'x-api-key': CLAUDE_API_KEY,
+                    'x-api-key': config.anthropicApiKey,
                     'content-type': 'application/json',
                     'anthropic-version': '2023-06-01',
                     'anthropic-dangerous-direct-browser-access': 'true'
@@ -152,7 +151,7 @@ function PdfTesting() {
           onDragOver={handleDragOver}
           onClick={() => document.getElementById('file-input').click()}
         >
-          <BsFiletypePdf className="file-drop-icon" />
+          <FaFileUpload className="file-drop-icon" />
           <p className="file-drop-text">
             {selectedFile ? selectedFile.name : 'Drop your PDF here'}
           </p>
@@ -168,7 +167,7 @@ function PdfTesting() {
       </section>
 
       <div className="models-grid">
-        {models.pdf.map(model => {
+        {config.pdf.map(model => {
           return (
             <div key={model.id} className="model-card">
               <div className="model-header">
@@ -179,7 +178,10 @@ function PdfTesting() {
               </div>
               <div className="response-area">
                 {loading[model.id] ? (
-                  <LoadingSpinner text="Analyzing PDF..." />
+                  <div className="loading-spinner">
+                    <div className="spinner-ring"></div>
+                    <div className="spinner-text">Analyzing PDF...</div>
+                  </div>
                 ) : responses[model.id] ? (
                   <div className="markdown-content">
                     <ReactMarkdown>{responses[model.id]}</ReactMarkdown>

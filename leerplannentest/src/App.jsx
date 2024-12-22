@@ -3,6 +3,7 @@ import Analyzer from './components/Analyzer'
 import ApiTesting from './components/ApiTesting'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Onderwijsdoelen from './components/Onderwijsdoelen'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           } />
           <Route path="/analyzer" element={<Analyzer />} />
           <Route path="/api-testing" element={<ApiTesting />} />
+          <Route path="/onderwijsdoelen" element={<Onderwijsdoelen />} />
         </Routes>
 
         <Footer />

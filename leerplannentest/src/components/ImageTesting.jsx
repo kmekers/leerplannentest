@@ -1,88 +1,89 @@
 import { useState } from 'react';
-import { BsImageFill } from 'react-icons/bs';
+import { FaImage } from 'react-icons/fa';
+import { config } from '../config/config';
 import ReactMarkdown from 'react-markdown';
-import { models, prompts } from '../config/config';
-import LoadingSpinner from './LoadingSpinner';
 
 function ImageTesting() {
   const [responses, setResponses] = useState({});
   const [loading, setLoading] = useState({});
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const handleTest = async (modelId) => {
     setLoading(prev => ({ ...prev, [modelId]: true }));
+    
+    try {
+      const reader = new FileReader();
+      
+      const processImage = () => {
+        return new Promise((resolve, reject) => {
+          reader.onload = async () => {
+            try {
+              const base64Image = reader.result.split(',')[1];
+              const model = config.image.find(m => m.id === modelId);
+              
+              const response = await fetch('http://localhost:11434/api/generate', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  model: model.modelId,
+                  prompt: model.prompt.system + '\n\n' + model.prompt.task,
+                  images: [base64Image],
+                  stream: false
+                }),
+              });
 
-    if (modelId === 'llama31') {
-      try {
-        const reader = new FileReader();
-        
-        const processImage = () => {
-          return new Promise((resolve, reject) => {
-            reader.onload = async () => {
-              try {
-                const base64Image = reader.result.split(',')[1];
-                const model = models.image.find(m => m.id === modelId);
-                
-                const response = await fetch('http://localhost:11434/api/generate', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({
-                    model: model.modelId,
-                    prompt: prompts.llama31.system + '\n\n' + prompts.llama31.task,
-                    images: [base64Image],
-                    stream: false
-                  }),
-                });
+              const data = await response.json();
+              resolve(data);
+            } catch (error) {
+              reject(error);
+            }
+          };
+          reader.onerror = () => reject(new Error('Failed to read file'));
+          reader.readAsDataURL(selectedImage);
+        });
+      };
 
-                const data = await response.json();
-                resolve(data);
-              } catch (error) {
-                reject(error);
-              }
-            };
-            reader.onerror = () => reject(new Error('Failed to read file'));
-            reader.readAsDataURL(selectedFile);
-          });
-        };
-
-        const data = await processImage();
-        setResponses(prev => ({
-          ...prev,
-          [modelId]: data.response
-        }));
-      } catch (error) {
-        setResponses(prev => ({
-          ...prev,
-          [modelId]: 'Error: ' + error.message
-        }));
-      } finally {
-        setLoading(prev => ({ ...prev, [modelId]: false }));
-      }
-    } else {
-      setTimeout(() => {
-        setResponses(prev => ({
-          ...prev,
-          [modelId]: `Test response for ${modelId} with image input.`
-        }));
-        setLoading(prev => ({ ...prev, [modelId]: false }));
-      }, 1500);
+      const data = await processImage();
+      setResponses(prev => ({
+        ...prev,
+        [modelId]: data.response
+      }));
+    } catch (error) {
+      console.error('Error with model:', modelId, error);
+      setResponses(prev => ({
+        ...prev,
+        [modelId]: 'Error: ' + error.message
+      }));
+    } finally {
+      setLoading(prev => ({ ...prev, [modelId]: false }));
     }
   };
 
-  const handleFileChange = (event) => {
+  const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setSelectedFile(file);
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   const handleDrop = (event) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
-    if (file) {
-      setSelectedFile(file);
+    if (file && file.type.startsWith('image/')) {
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -97,25 +98,39 @@ function ImageTesting() {
           className="file-drop-area"
           onDrop={handleDrop}
           onDragOver={handleDragOver}
-          onClick={() => document.getElementById('file-input').click()}
+          onClick={() => document.getElementById('image-input').click()}
         >
-          <BsImageFill className="file-drop-icon" />
-          <p className="file-drop-text">
-            {selectedFile ? selectedFile.name : 'Drop your image here'}
-          </p>
-          <p className="file-drop-subtext">or click to browse</p>
+          {imagePreview ? (
+            <img 
+              src={imagePreview} 
+              alt="Preview" 
+              style={{ 
+                maxWidth: '100%', 
+                maxHeight: '200px', 
+                borderRadius: '0.5rem' 
+              }} 
+            />
+          ) : (
+            <>
+              <FaImage className="file-drop-icon" />
+              <p className="file-drop-text">
+                {selectedImage ? selectedImage.name : 'Drop your image here'}
+              </p>
+              <p className="file-drop-subtext">or click to browse</p>
+            </>
+          )}
           <input
-            id="file-input"
+            id="image-input"
             type="file"
             accept="image/*"
-            onChange={handleFileChange}
+            onChange={handleImageChange}
             style={{ display: 'none' }}
           />
         </div>
       </section>
 
       <div className="models-grid">
-        {models.image.map(model => {
+        {config.image.map(model => {
           return (
             <div key={model.id} className="model-card">
               <div className="model-header">
@@ -126,7 +141,10 @@ function ImageTesting() {
               </div>
               <div className="response-area">
                 {loading[model.id] ? (
-                  <LoadingSpinner text="Analyzing image..." />
+                  <div className="loading-spinner">
+                    <div className="spinner-ring"></div>
+                    <div className="spinner-text">Analyzing image...</div>
+                  </div>
                 ) : responses[model.id] ? (
                   <div className="markdown-content">
                     <ReactMarkdown>{responses[model.id]}</ReactMarkdown>
@@ -138,7 +156,7 @@ function ImageTesting() {
               <button
                 className={`test-button ${loading[model.id] ? 'disabled' : ''}`}
                 onClick={() => handleTest(model.id)}
-                disabled={loading[model.id] || !selectedFile}
+                disabled={loading[model.id] || !selectedImage}
               >
                 {loading[model.id] ? 'Analyzing...' : 'Test Model'}
               </button>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RiRobot2Fill, RiBrainFill, RiTestTubeFill } from 'react-icons/ri';
+import { RiRobot2Fill, RiBrainFill, RiTestTubeFill, RiBookOpenLine } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 
 function Header() {
@@ -12,6 +12,8 @@ function Header() {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -30,6 +32,10 @@ function Header() {
           <Link to="/api-testing" className="nav-link">
             <RiTestTubeFill className="nav-icon" />
             <span>Model Testing</span>
+          </Link>
+          <Link to="/onderwijsdoelen" className="nav-link">
+            <RiBookOpenLine className="nav-icon" />
+            <span>Onderwijsdoelen</span>
           </Link>
         </div>
       </div>
