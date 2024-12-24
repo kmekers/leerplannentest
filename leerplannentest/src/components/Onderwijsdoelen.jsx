@@ -92,10 +92,6 @@ const Onderwijsdoelen = () => {
 
   return (
     <div className="main">
-      <div className="header">
-        <h1 className="title">Vlaamse Onderwijsdoelen</h1>
-      </div>
-
       <div className="filter-type">
         <h2 className="filter-title">Klik op de competentie waar jij rond wil werken voor heldere informatie én specifiek lesmateriaal.</h2>
         <div className="filter-buttons">
@@ -133,7 +129,7 @@ const Onderwijsdoelen = () => {
             className={`filter-button ${selectedSleutelcompetentie === '6' ? 'active' : ''}`}
             onClick={() => handleCompetentieClick('6')}
           >
-            6. Wiskunde – natuurwetenschappen – technologie – STEM
+            6. Wiskunde – Nat - Tech - Stem
           </button>
           <button 
             className={`filter-button ${selectedSleutelcompetentie === '7' ? 'active' : ''}`}
@@ -219,9 +215,6 @@ const Onderwijsdoelen = () => {
               <div key={doel.id} className="doel-card">
                 <div className="doel-header">
                   <div className="doel-code">{doel.code}</div>
-                  <div className="doel-content">
-                    {doel.omschrijving}
-                  </div>
                 </div>
                 <div className={`doel-description ${!isExpanded ? 'collapsed' : ''}`}>
                   {isExpanded ? description : truncateText(description)}
@@ -230,9 +223,11 @@ const Onderwijsdoelen = () => {
                   </button>
                 </div>
                 {doel.titels?.[1]?.titel && (
-                  <div className="doel-titel">
-                    <strong>Bouwsteen</strong>
-                    {stripHtmlTags(doel.titels[1].titel)}
+                  <div className="doel-titel-section">
+                    <div className="doel-titel">Bouwsteen</div>
+                    <div className="doel-titel-content">
+                      {stripHtmlTags(doel.titels[1].titel)}
+                    </div>
                   </div>
                 )}
 

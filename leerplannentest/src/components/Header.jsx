@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { RiRobot2Fill, RiBrainFill, RiTestTubeFill, RiBookOpenLine } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
+import './Header.css';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,20 +23,20 @@ function Header() {
       <div className="nav-container">
         <Link to="/" className="nav-brand">
           <RiRobot2Fill className="nav-icon brand-icon" />
-          <span>AI Teacher Assistant</span>
+          <span>Mardy</span>
         </Link>
         <div className="nav-links">
           <Link to="/analyzer" className="nav-link">
-            <RiBrainFill className="nav-icon" />
-            <span>Leerplannen Doel Analyzer</span>
+            <RiBrainFill className="nav-icon page-icon" />
+            <span>Analyzer</span>
           </Link>
           <Link to="/api-testing" className="nav-link">
-            <RiTestTubeFill className="nav-icon" />
-            <span>Model Testing</span>
+            <RiTestTubeFill className="nav-icon page-icon" />
+            <span>Testing</span>
           </Link>
           <Link to="/onderwijsdoelen" className="nav-link">
-            <RiBookOpenLine className="nav-icon" />
-            <span>Onderwijsdoelen</span>
+            <RiBookOpenLine className="nav-icon page-icon" />
+            <span>Doelen</span>
           </Link>
         </div>
       </div>

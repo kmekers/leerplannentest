@@ -1,0 +1,111 @@
+.leerdoelen-matcher {
+    padding: 20px;
+    background-color: #1F2937;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.match-button {
+    background-color: #0891B2;
+    color: #F3F4F6;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.match-button:hover:not(:disabled) {
+    background-color: #0E7490;
+}
+
+.match-button:disabled {
+    background-color: #374151;
+    cursor: not-allowed;
+}
+
+.error-message {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: rgba(220, 38, 38, 0.1);
+    border: 1px solid #DC2626;
+    color: #DC2626;
+    border-radius: 6px;
+}
+
+.match-results {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #374151;
+    border-radius: 6px;
+}
+
+.match-results h3 {
+    color: #22D3EE;
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.match-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(55, 65, 81, 0.5);
+    border: 1px solid #4B5563;
+    border-radius: 6px;
+}
+
+.match-item h4 {
+    color: #F3F4F6;
+    margin-bottom: 10px;
+}
+
+.match-item ul {
+    list-style: none;
+    padding: 0;
+}
+
+.match-item li {
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: rgba(55, 65, 81, 0.3);
+    border-radius: 4px;
+}
+
+.match-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.match-score {
+    background-color: #155E75;
+    color: #22D3EE;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.match-id {
+    color: #9CA3AF;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+.match-content {
+    margin-left: 70px;
+}
+
+.match-description {
+    color: #F3F4F6;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.match-explanation {
+    color: #9CA3AF;
+    font-size: 0.95em;
+    line-height: 1.4;
+} 
