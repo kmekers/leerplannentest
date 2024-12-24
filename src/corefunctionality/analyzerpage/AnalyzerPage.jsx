@@ -156,8 +156,8 @@ Gebruik deze exacte structuur en kopjes. Zorg voor duidelijke bullet points bij 
 
             // After getting the summary, get the lesson plan
             const lessonPlanResponse = await callClaudeAPI({
-                model: "claude-3-sonnet-20240229",
-                prompt: `Based on this lesson content, create a detailed lesson plan table. Format it exactly like this:
+                model: "claude-3-5-sonnet-20241022",
+                prompt: `Based on this lesson content, create a detailed lesson plan table for a class of 50 minutes. Format it exactly like this:
 
 Tijd | Activiteit | Beschrijving
 --- | --- | ---
@@ -166,7 +166,7 @@ Tijd | Activiteit | Beschrijving
 5 min | Uitleg opdracht | Korte instructie
 etc...
 
-Please maintain this exact format with minutes in the Tijd column.\n\n${lessonContent}`
+Please maintain this exact format with minutes in the Tijd column ONLY PRESENT THE TABLE AND NOTHING ELSE.\n\n${lessonContent}`
             });
 
             setLessonPlan(lessonPlanResponse.content[0].text);
@@ -644,10 +644,7 @@ Gebruik de exacte codes (zoals 1.1, 2.3, etc.) aan het begin van elke regel.`
                         text: "Lesvoorbereiding",
                         style: "Title"
                     }),
-                    new Paragraph({
-                        text: "Samenvatting",
-                        heading: HeadingLevel.HEADING_1,
-                    }),
+    
                     ...processSummaryText(summary),
                     new Paragraph({
                         text: "Lesverloop",

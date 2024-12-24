@@ -332,4 +332,97 @@ textarea {
 .print-button svg {
   font-size: 1.2rem;
 }
+
+.competentie-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.competentie-button {
+  padding: 0.8rem 1.5rem;
+  background-color: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: center;
+  min-height: 60px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.competentie-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(34, 211, 238, 0.2),
+    transparent
+  );
+  transition: transform 0.3s ease;
+}
+
+.competentie-button:hover {
+  color: var(--accent-hover);
+  transform: translateY(-2px);
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
+}
+
+.competentie-button:hover::after {
+  animation: shine 3s infinite;
+}
+
+.competentie-button.active {
+  background-color: rgba(34, 211, 238, 0.15);
+  color: var(--accent-hover);
+  box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+  text-shadow: 0 0 10px var(--accent);
+}
+
+@keyframes shine {
+  0% {
+    left: -150%;
+  }
+  50% {
+    left: 150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .competentie-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .competentie-grid {
+    grid-template-columns: 1fr;
+  }
+}
   

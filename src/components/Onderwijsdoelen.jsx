@@ -92,10 +92,6 @@ const Onderwijsdoelen = () => {
 
   return (
     <div className="main">
-      <div className="header">
-        <h1 className="title">Vlaamse Onderwijsdoelen</h1>
-      </div>
-
       <div className="filter-type">
         <h2 className="filter-title">Klik op de competentie waar jij rond wil werken voor heldere informatie én specifiek lesmateriaal.</h2>
         <div className="filter-buttons">
@@ -133,7 +129,7 @@ const Onderwijsdoelen = () => {
             className={`filter-button ${selectedSleutelcompetentie === '6' ? 'active' : ''}`}
             onClick={() => handleCompetentieClick('6')}
           >
-            6. Wiskunde – natuurwetenschappen – technologie – STEM
+            6. Wiskunde – Nat - Tech - Stem
           </button>
           <button 
             className={`filter-button ${selectedSleutelcompetentie === '7' ? 'active' : ''}`}

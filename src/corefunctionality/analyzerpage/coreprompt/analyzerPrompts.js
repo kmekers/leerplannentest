@@ -19,7 +19,7 @@ Je taak is om:
 2. Leerdoelen
 3. activiteiten of werkvormen
 
-Houd het kort en bondig.`
+Houd het kort en bondig. GEEF GEEN VOOR OF NA TEKST ALLEEN DE ANALYSE, dus ook geen intro of conclusie.`
     }
 };
 
