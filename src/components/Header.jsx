@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RiRobot2Fill, RiBrainFill, RiTestTubeFill, RiBookOpenLine } from 'react-icons/ri';
+import { RiRobot2Fill, RiBrainFill, RiTestTubeFill, RiBookOpenLine, RiCpuLine } from 'react-icons/ri';
 import { useEffect, useState } from 'react';
 import './Header.css';
 
@@ -37,6 +37,10 @@ function Header() {
           <Link to="/onderwijsdoelen" className="nav-link">
             <RiBookOpenLine className="nav-icon page-icon" />
             <span>Doelen</span>
+          </Link>
+          <Link to="/local" className="nav-link">
+            <RiCpuLine className="nav-icon page-icon" />
+            <span>Lokaal</span>
           </Link>
         </div>
       </div>

@@ -45,6 +45,9 @@ const AnalyzerPage = () => {
     const [lessonPlan, setLessonPlan] = useState('');
     const [expandedSection, setExpandedSection] = useState('summary'); // 'summary', 'lessonPlan', or competency number
 
+    // Add this state near the other state declarations
+    const [showWarningModal, setShowWarningModal] = useState(false);
+
     // Fetch onderwijsdoelen on mount
     useEffect(() => {
         const fetchDoelen = async () => {
@@ -182,25 +185,32 @@ Please maintain this exact format with minutes in the Tijd column ONLY PRESENT T
                     // Get competency goals
                     const doelen = onderwijsdoelen[competency] || [];
                     const doelenText = doelen.map(doel => 
-                        `${doel.code}\n${doel.omschrijving}`
+                        `${doel.code}\n${doel.omschrijving}\n\nDetails:\n` +
+                        (doel.cognitieve_dimensie ? `Cognitieve dimensie: ${doel.cognitieve_dimensie}\n` : '') +
+                        (doel.conceptuele_kennis ? `Conceptuele kennis: ${doel.conceptuele_kennis}\n` : '') +
+                        (doel.procedurele_kennis ? `Procedurele kennis: ${doel.procedurele_kennis}\n` : '') +
+                        (doel.feitelijke_kennis ? `Feitelijke kennis: ${doel.feitelijke_kennis}\n` : '')
                     ).join('\n\n');
 
                     // Analyze competency match
                     const result = await callClaudeAPI({
                         model: "claude-3-sonnet-20240229",
                         prompt: `${lessonContent}\n\n${doelenText}\n\n
-Geef je analyse in dit formaat:
+Analyseer de les en geef aan welke leerdoelen matchen. Gebruik exact dit formaat:
 
-Matchen:
-- [leerdoel code] [beschrijving]
-- [leerdoel code] [beschrijving]
+MATCHEN:
+- [code] [exacte omschrijving van het leerdoel]
+  Reden: [Eén zin die uitlegt waarom dit leerdoel matcht met de les]
 
-Matchen niet:
-- [leerdoel code] [beschrijving]
-- [leerdoel code] [beschrijving]
+MATCHEN NIET:
+- [code] [exacte omschrijving van het leerdoel]
+  Reden: [Eén zin die uitlegt waarom dit leerdoel niet matcht met de les]
 
-Zorg ervoor dat elk leerdoel op een nieuwe regel begint met een streepje (-).
-Gebruik de exacte codes (zoals 1.1, 2.3, etc.) aan het begin van elke regel.`
+Belangrijk:
+1. Gebruik de EXACTE tekst van elk leerdoel, verander niets aan de formulering
+2. Geef per leerdoel slechts één korte zin uitleg
+3. Begin elk leerdoel met een streepje (-) en de exacte code
+4. Gebruik de dimensies (cognitief, conceptueel, procedureel, feitelijk) in je uitleg`
                     });
 
                     newResults[competency] = result;
@@ -266,7 +276,13 @@ Gebruik de exacte codes (zoals 1.1, 2.3, etc.) aan het begin van elke regel.`
         setLessonPlan(newLessonPlan);
     };
 
-    const generateWordDocument = async () => {
+    const generateWordDocument = () => {
+        setShowWarningModal(true);
+    };
+
+    const handleAcceptWarning = async () => {
+        setShowWarningModal(false);
+        
         // Create lesson plan table
         const lessonPlanRows = parseLessonPlan(lessonPlan);
         const tableRows = [
@@ -690,122 +706,124 @@ Gebruik de exacte codes (zoals 1.1, 2.3, etc.) aan het begin van elke regel.`
             </div>
 
             <div className="analyzer-content">
-                <div className="upload-section">
-                    <PdfUploader onFileSelect={handleFileSelect} />
-                    
-                    {selectedFile && (
-                        <button 
-                            className="analyze-button"
-                            onClick={analyzePdf} 
-                            disabled={isAnalyzing || selectedCompetencies.length === 0}
-                        >
-                            {isAnalyzing ? 'Bezig met analyseren...' : 'Analyseer Les'}
-                        </button>
-                    )}
-
-                    {summary && (
-                        <div className="results-section">
-                            <div className="result-section-header" onClick={() => handleSectionClick('summary')}>
-                                <h3>Samenvatting</h3>
-                                {expandedSection === 'summary' ? <IoChevronUp /> : <IoChevronDown />}
-                            </div>
-                            {expandedSection === 'summary' && (
-                                <textarea 
-                                    value={summary} 
-                                    onChange={(e) => setSummary(e.target.value)} 
-                                    rows={10}
-                                />
-                            )}
-
-                            <div className="result-section-header" onClick={() => handleSectionClick('lessonPlan')}>
-                                <h3>Lesverloop</h3>
-                                {expandedSection === 'lessonPlan' ? <IoChevronUp /> : <IoChevronDown />}
-                            </div>
-                            {expandedSection === 'lessonPlan' && (
-                                <div className="lesson-plan-table">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Tijd</th>
-                                                <th>Activiteit</th>
-                                                <th>Beschrijving</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {parseLessonPlan(lessonPlan).map((row, index) => (
-                                                <tr key={index}>
-                                                    <td>
-                                                        <input
-                                                            type="text"
-                                                            value={row.time}
-                                                            onChange={(e) => handleCellEdit(index, 'time', e.target.value)}
-                                                        />
-                                                    </td>
-                                                    <td>
-                                                        <input
-                                                            type="text"
-                                                            value={row.activity}
-                                                            onChange={(e) => handleCellEdit(index, 'activity', e.target.value)}
-                                                        />
-                                                    </td>
-                                                    <td>
-                                                        <input
-                                                            type="text"
-                                                            value={row.description}
-                                                            onChange={(e) => handleCellEdit(index, 'description', e.target.value)}
-                                                        />
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            )}
-
-                            <div className="competencies-results">
-                                {sortCompetencies(Object.keys(matchResults)).map((competency) => {
-                                    const result = matchResults[competency];
-                                    return (
-                                        <div key={competency} className="competency-result">
-                                            <div 
-                                                className="result-section-header"
-                                                onClick={() => handleSectionClick(competency)}
-                                            >
-                                                <h3>Competentie {competency}: {competentieNames[competency]}</h3>
-                                                {expandedSection === competency ? <IoChevronUp /> : <IoChevronDown />}
-                                            </div>
-                                            {expandedSection === competency && (
-                                                result.loading ? (
-                                                    <div>Bezig met analyseren...</div>
-                                                ) : (
-                                                    <textarea 
-                                                        value={result.content[0].text}
-                                                        onChange={(e) => {
-                                                            setMatchResults({
-                                                                ...matchResults,
-                                                                [competency]: {
-                                                                    content: [{ text: e.target.value }]
-                                                                }
-                                                            });
-                                                        }}
-                                                        rows={10}
-                                                    />
-                                                )
-                                            )}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-
+                {!summary && (
+                    <div className="upload-section">
+                        <PdfUploader onFileSelect={handleFileSelect} />
+                        
+                        {selectedFile && (
                             <button 
-                                className="print-button"
-                                onClick={generateWordDocument}
+                                className="analyze-button"
+                                onClick={analyzePdf} 
+                                disabled={isAnalyzing || selectedCompetencies.length === 0}
                             >
-                                <FiDownload /> Lesvoorbereiding
+                                {isAnalyzing ? 'Bezig met analyseren...' : 'Analyseer Les'}
                             </button>
+                        )}
+                    </div>
+                )}
+
+                {summary && (
+                    <div className="results-section">
+                        <div className="result-section-header" onClick={() => handleSectionClick('summary')}>
+                            <h3>Samenvatting</h3>
+                            {expandedSection === 'summary' ? <IoChevronUp /> : <IoChevronDown />}
                         </div>
-                    )}
-                </div>
+                        {expandedSection === 'summary' && (
+                            <textarea 
+                                value={summary} 
+                                onChange={(e) => setSummary(e.target.value)} 
+                                rows={10}
+                            />
+                        )}
+
+                        <div className="result-section-header" onClick={() => handleSectionClick('lessonPlan')}>
+                            <h3>Lesverloop</h3>
+                            {expandedSection === 'lessonPlan' ? <IoChevronUp /> : <IoChevronDown />}
+                        </div>
+                        {expandedSection === 'lessonPlan' && (
+                            <div className="lesson-plan-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tijd</th>
+                                            <th>Activiteit</th>
+                                            <th>Beschrijving</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {parseLessonPlan(lessonPlan).map((row, index) => (
+                                            <tr key={index}>
+                                                <td>
+                                                    <input
+                                                        type="text"
+                                                        value={row.time}
+                                                        onChange={(e) => handleCellEdit(index, 'time', e.target.value)}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        type="text"
+                                                        value={row.activity}
+                                                        onChange={(e) => handleCellEdit(index, 'activity', e.target.value)}
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        type="text"
+                                                        value={row.description}
+                                                        onChange={(e) => handleCellEdit(index, 'description', e.target.value)}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
+
+                        <div className="competencies-results">
+                            {sortCompetencies(Object.keys(matchResults)).map((competency) => {
+                                const result = matchResults[competency];
+                                return (
+                                    <div key={competency} className="competency-result">
+                                        <div 
+                                            className="result-section-header"
+                                            onClick={() => handleSectionClick(competency)}
+                                        >
+                                            <h3>Competentie {competency}: {competentieNames[competency]}</h3>
+                                            {expandedSection === competency ? <IoChevronUp /> : <IoChevronDown />}
+                                        </div>
+                                        {expandedSection === competency && (
+                                            result.loading ? (
+                                                <div>Bezig met analyseren...</div>
+                                            ) : (
+                                                <textarea 
+                                                    value={result.content[0].text}
+                                                    onChange={(e) => {
+                                                        setMatchResults({
+                                                            ...matchResults,
+                                                            [competency]: {
+                                                                content: [{ text: e.target.value }]
+                                                            }
+                                                        });
+                                                    }}
+                                                    rows={10}
+                                                />
+                                            )
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        <button 
+                            className="print-button"
+                            onClick={generateWordDocument}
+                        >
+                            <FiDownload /> Lesvoorbereiding
+                        </button>
+                    </div>
+                )}
 
                 {pdfUrl && (
                     <div className="pdf-preview">
@@ -813,6 +831,23 @@ Gebruik de exacte codes (zoals 1.1, 2.3, etc.) aan het begin van elke regel.`
                             src={pdfUrl} 
                             title="PDF Viewer"
                         />
+                    </div>
+                )}
+
+                {showWarningModal && (
+                    <div className="modal-overlay">
+                        <div className="modal-content">
+                            <h2>AI Content Waarschuwing</h2>
+                            <p>Dubbel check AI content, kan bias of hallucinaties bevatten. Verwijder competenties die niet van toepassing zijn.</p>
+                            <div className="modal-buttons">
+                                <button className="modal-button cancel" onClick={() => setShowWarningModal(false)}>
+                                    Annuleer
+                                </button>
+                                <button className="modal-button accept" onClick={handleAcceptWarning}>
+                                    Accepteer
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>

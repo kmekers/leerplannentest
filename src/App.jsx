@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Onderwijsdoelen from './components/Onderwijsdoelen'
 import AnalyzerPage from './corefunctionality/analyzerpage/AnalyzerPage'
 import Home from './components/Home'
+import LocalPage from './localpage/LocalPage'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/analyzer" element={<AnalyzerPage />} />
           <Route path="/api-testing" element={<ApiTesting />} />
           <Route path="/onderwijsdoelen" element={<Onderwijsdoelen />} />
+          <Route path="/local" element={<LocalPage />} />
         </Routes>
 
         <Footer />

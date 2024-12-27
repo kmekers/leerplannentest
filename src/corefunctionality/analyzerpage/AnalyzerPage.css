@@ -41,48 +41,21 @@
   margin: 0 auto;
 }
 
-.upload-section {
+.upload-section, .results-section {
+  min-height: 300px;
   background: rgba(31, 41, 55, 0.3);
   border: 1px solid rgba(34, 211, 238, 0.3);
   border-radius: 12px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
-
-.analyze-button {
-  text-align: center;
-  background: rgba(31, 41, 55, 0.3);
-  color: #22D3EE;
-  border: 1px solid rgba(34, 211, 238, 0.3);
-  border-radius: 8px;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  width: fit-content;
-  margin: 1rem auto;
+  height: fit-content;
 }
 
-.analyze-button:hover {
-  background: rgba(31, 41, 55, 0.5);
-  border-color: rgba(34, 211, 238, 0.5);
-  box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
-  transform: translateY(-2px);
-}
-
-.analyze-button:disabled {
-  background: rgba(31, 41, 55, 0.2);
-  color: rgba(34, 211, 238, 0.5);
-  border-color: rgba(34, 211, 238, 0.1);
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+.results-section {
+  margin-top: 0;
+  grid-column: 1;
 }
 
 .pdf-preview {
@@ -91,6 +64,7 @@
   border-radius: 12px;
   padding: 1rem;
   height: fit-content;
+  grid-column: 2;
 }
 
 .pdf-preview iframe {
@@ -98,14 +72,6 @@
   height: 800px;
   border: none;
   border-radius: 8px;
-}
-
-.results-section {
-  margin-top: 2rem;
-  background: rgba(31, 41, 55, 0.3);
-  border: 1px solid rgba(34, 211, 238, 0.3);
-  border-radius: 12px;
-  padding: 2rem;
 }
 
 .results-section h3 {
@@ -128,12 +94,12 @@
 }
 
 .competencies-results {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 }
 
 .competency-result {
-  margin-top: 2rem;
-  padding-top: 2rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
   border-top: 1px solid rgba(34, 211, 238, 0.2);
 }
 
@@ -213,7 +179,7 @@
 }
 
 .competency-result:first-child {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
 }
 
 /* Update existing textarea styles */
@@ -424,5 +390,82 @@ textarea {
   .competentie-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #1F2937;
+    border: 1px solid #22D3EE;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+}
+
+.modal-content h2 {
+    color: #22D3EE;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+.modal-content p {
+    color: #F3F4F6;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.modal-button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-button.cancel {
+    background: rgba(31, 41, 55, 0.5);
+    border: 1px solid #4B5563;
+    color: #9CA3AF;
+}
+
+.modal-button.cancel:hover {
+    background: rgba(31, 41, 55, 0.7);
+    border-color: #6B7280;
+}
+
+.modal-button.accept {
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid #22D3EE;
+    color: #22D3EE;
+}
+
+.modal-button.accept:hover {
+    background: rgba(34, 211, 238, 0.2);
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
+    transform: translateY(-1px);
 }
   

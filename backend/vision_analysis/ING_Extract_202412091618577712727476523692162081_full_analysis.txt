@@ -1,0 +1,41 @@
+
+================================================================================
+Page 1
+================================================================================
+
+ORIGINAL TEXT:
+----------------------------------------
+Rekening
+DE H KOEN MEKERS
+Zichtrekening
+BE07 3771 0004 8766
+Details transactie
+dinsdag 3 december
+2024
+Beschrijving
+HYPOTHECAIR KREDIET 123035 VERVALDA
+G : NOVEMBER
+Valutadatum: 01/12/2024
+Verrichtingnummer: 939
+-709,30 €
+Dit document werd gegenereerd op 09/12/2024. De transactie werd gedebiteerd voor uitvoering. Deze
+transactiegegevens zijn niet geldig als bewijs dat het geld aan de begunstigde is gecrediteerd.
+ING België / NV - Marnixlaan 24, 1000 Brussel, België - BTW BE 0403.200.393
+
+VISION ANALYSIS:
+----------------------------------------
+Deze pagina bevat een rekeningafschrift van ING België voor DE H KOEN MEKERS. De transactie betreft een hypotheekkrediet met een bedrag van -709,30 € en is gedebiteerd op 3 december 2024. Het document werd gegenereerd op 9 december 2024 en de transactiegegevens zijn niet geldig als bewijs dat het geld aan de begunstigde is gecrediteerd.
+**Visuele elementen:**
+* De pagina bevat een kopje met de tekst "Rekening" en de naam van de rekeninghouder, DE H KOEN MEKERS.
+* In de linkerbovenhoek staat de logo van ING België, een oranje leeuw.
+* In de onderste rechterhoek staat de adreskaart van ING België.
+**Inhoud:**
+De pagina bevat verschillende secties:
+* **Rekening**: Deze sectie bevat de naam en het nummer van de rekeninghouder, DE H KOEN MEKERS.
+* **Details transactie**: Deze sectie bevat informatie over de transactie, zoals de datum, bedrag en beschrijving.
+* **Beschrijving**: Deze sectie bevat een korte beschrijving van de transactie.
+* **Valutadatum**: Deze sectie bevat de valutadatum van de transactie.
+* **Verrichtingnummer**: Deze sectie bevat het verrichtingnummer van de transactie.
+* **Dit document werd gegenereerd op 09/12/2024. De transactie werd gedebiteerd voor uitvoering. Deze transactiegegevens zijn niet geldig als bewijs dat het geld aan de begunstigde is gecrediteerd.**: Deze sectie bevat een korte tekst over de validiteit van de transactiegegevens.
+In het algemeen kan worden gezegd dat deze pagina een rekeningafschrift bevat met informatie over een hypotheekkrediettransactie voor DE H KOEN MEKERS.
+
