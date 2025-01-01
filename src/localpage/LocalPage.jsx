@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PdfUploader from '../corefunctionality/corecomponents/PdfUploader';
 import LeerdoelenSelector from '../corefunctionality/corecomponents/LeerdoelenSelector';
 import './LocalPage.css';
+import { IoChevronDown } from 'react-icons/io5';
 
 function LocalPage() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -12,6 +13,7 @@ function LocalPage() {
   const [pageCount, setPageCount] = useState(0);
   const [selectedPages, setSelectedPages] = useState([]);
   const [analysisResults, setAnalysisResults] = useState(null);
+  const [classificationVisible, setClassificationVisible] = useState(true);
   const [classificationResults, setClassificationResults] = useState(null);
   const [currentlyAnalyzing, setCurrentlyAnalyzing] = useState(null);
   const [modelChoice, setModelChoice] = useState("llama");
@@ -20,14 +22,14 @@ function LocalPage() {
   const [conversationHistory, setConversationHistory] = useState([]);
   const [onderwijsdoelen, setOnderwijsdoelen] = useState({});
   const [selectedCompetencies, setSelectedCompetencies] = useState([]);
-  const [pdfSummary, setPdfSummary] = useState(null);
+  const [summaryContent, setSummaryContent] = useState('');
   const [isSummarizing, setIsSummarizing] = useState(false);
   const [editableAnalysis, setEditableAnalysis] = useState([]);
   const [editableClassification, setEditableClassification] = useState('');
-  const [editableSummary, setEditableSummary] = useState('');
-  const [analysisVisible, setAnalysisVisible] = useState(true);
-  const [classificationVisible, setClassificationVisible] = useState(true);
   const [summaryVisible, setSummaryVisible] = useState(true);
+  const [pdfText, setPdfText] = useState('');
+  const [fileId, setFileId] = useState(null);
+  const [expandedPages, setExpandedPages] = useState({});
 
   const competentieNames = {
     '1': 'Lichamelijke en geestelijke gezondheid',
@@ -82,160 +84,103 @@ function LocalPage() {
   }, []);
 
   const handleFileSelect = async (file) => {
-    if (!file) return;
-    
-    // Reset all states at once
-    const resetStates = {
-      selectedFile: file,
-      pdfUrl: URL.createObjectURL(file),
-      analysisResults: null,
-      pdfSummary: null,
-      uploadError: null,
-      pageCount: 0,
-      selectedPages: [],
-      isProcessing: true,
-      currentlyAnalyzing: null,
-      classificationResults: null
-    };
-    
-    // Batch update all states
-    Object.entries(resetStates).forEach(([key, value]) => {
-      switch(key) {
-        case 'selectedFile':
-          setSelectedFile(value);
-          break;
-        case 'pdfUrl':
-          setPdfUrl(value);
-          break;
-        case 'analysisResults':
-          setAnalysisResults(value);
-          break;
-        case 'pdfSummary':
-          setPdfSummary(value);
-          break;
-        case 'uploadError':
-          setUploadError(value);
-          break;
-        case 'pageCount':
-          setPageCount(value);
-          break;
-        case 'selectedPages':
-          setSelectedPages(value);
-          break;
-        case 'isProcessing':
-          setIsProcessing(value);
-          break;
-        case 'currentlyAnalyzing':
-          setCurrentlyAnalyzing(value);
-          break;
-        case 'classificationResults':
-          setClassificationResults(value);
-          break;
-      }
-    });
-    
     try {
-      // Get page count
-      const countFormData = new FormData();
-      countFormData.append('file', file);
-      
-      const countResponse = await fetch('http://localhost:5002/get-page-count', {
-        method: 'POST',
-        body: countFormData
-      });
-      
-      if (countResponse.ok) {
+        setIsProcessing(true);
+        setSelectedFile(file);
+        
+        // Create object URL for PDF preview
+        const fileUrl = URL.createObjectURL(file);
+        setPdfUrl(fileUrl);
+        
+        // Get page count
+        const countFormData = new FormData();
+        countFormData.append('file', file);
+        
+        const countResponse = await fetch('http://localhost:5002/get-page-count', {
+            method: 'POST',
+            body: countFormData
+        });
+        
+        if (!countResponse.ok) {
+            throw new Error(`HTTP error! status: ${countResponse.status}`);
+        }
+        
         const countData = await countResponse.json();
         const allPages = Array.from({length: countData.page_count}, (_, i) => i + 1);
         setPageCount(countData.page_count);
         setSelectedPages(allPages);
         
-        // Convert pages
+        // Upload PDF
         const formData = new FormData();
         formData.append('file', file);
         formData.append('pages', JSON.stringify(allPages));
         
         const response = await fetch('http://localhost:5002/upload-pdf', {
-          method: 'POST',
-          body: formData
+            method: 'POST',
+            body: formData
         });
         
-        if (response.ok) {
-          const data = await response.json();
-          console.log(`Converted ${data.pages_converted} pages`);
-          
-          // First update UI with PDF info and wait for render
-          setIsProcessing(false);
-          
-          // Wait for UI to update and files to be written
-          await new Promise(resolve => setTimeout(resolve, 1500));
-          
-          // Then start summary generation
-          const generateSummary = async () => {
-            setIsSummarizing(true);
-            try {
-              const strippedTextResponse = await fetch('http://localhost:5002/get-stripped-text', {
-                method: 'POST'
-              });
-
-              if (!strippedTextResponse.ok) {
-                throw new Error('Failed to get stripped text');
-              }
-
-              const textData = await strippedTextResponse.json();
-              
-              if (!textData.text_content) {
-                throw new Error('No text content available');
-              }
-              
-              // Generate summary using stripped text
-              const summaryResponse = await fetch('http://localhost:5002/summarize-pdf', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  content: textData.text_content,
-                  model: 'mistral-nemo'
-                })
-              });
-
-              if (summaryResponse.ok) {
-                const summaryData = await summaryResponse.json();
-                const summaryText = summaryData.summary.summary;
-                setPdfSummary(summaryText);
-                setEditableSummary(summaryText);
-              } else {
-                const errorText = await summaryResponse.text();
-                console.error('Failed to get summary:', errorText);
-                throw new Error(`Summary generation failed: ${errorText}`);
-              }
-            } catch (error) {
-              console.error('Error in summary process:', error);
-              setUploadError(`Summary error: ${error.message}`);
-            } finally {
-              setIsSummarizing(false);
-            }
-          };
-
-          // Start summary generation after UI update
-          generateSummary();
-          
-        } else {
-          const errorText = await response.text();
-          console.error('Conversion failed:', errorText);
-          setUploadError(`Error converting PDF: ${errorText}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-      } else {
-        const errorText = await countResponse.text();
-        console.error('Failed to get page count:', errorText);
-        setUploadError(`Error getting page count: ${errorText}`);
-      }
+        
+        const data = await response.json();
+        setFileId(data.file_id);
+        
+        // Get text content
+        const textResponse = await fetch(`http://localhost:5002/get-stripped-text/${data.file_id}`);
+        if (!textResponse.ok) {
+            throw new Error(`HTTP error! status: ${textResponse.status}`);
+        }
+        
+        const textData = await textResponse.json();
+        setPdfText(textData.text);
+        
+        // PDF info is now loaded
+        setIsProcessing(false);
+
+        // Start summary generation after PDF info is loaded
+        await generateSummary(data.file_id);
+        
     } catch (error) {
-      console.error('Error processing PDF:', error);
-      setUploadError(`Error uploading PDF: ${error.message}`);
+        console.error('Error processing PDF:', error);
+        setUploadError(error.message);
+        setIsProcessing(false);
+        setIsSummarizing(false);
+    }
+  };
+
+  // Separate function for summary generation
+  const generateSummary = async (fileId) => {
+    try {
+        setIsSummarizing(true);
+        console.log('Starting summary generation for fileId:', fileId);
+        
+        const summaryResponse = await fetch(`http://localhost:5002/summarize-pdf/${fileId}`, {
+            method: 'POST'
+        });
+        if (!summaryResponse.ok) {
+            throw new Error(`HTTP error! status: ${summaryResponse.status}`);
+        }
+        
+        const summaryData = await summaryResponse.json();
+        console.log('Received summary data:', summaryData);
+        console.log('Summary data type:', typeof summaryData.summary);
+        
+        if (!summaryData.summary) {
+            throw new Error('No summary content in response');
+        }
+        
+        setSummaryContent(summaryData.summary);
+        setSummaryVisible(true);
+        console.log('Set summary content:', summaryData.summary);
+        console.log('Summary visible:', true);
+    } catch (error) {
+        console.error('Error generating summary:', error);
+        setUploadError(error.message);
     } finally {
-      setIsProcessing(false);
+        setIsSummarizing(false);
+        console.log('Summarizing complete, isSummarizing:', false);
     }
   };
 
@@ -299,38 +244,57 @@ function LocalPage() {
     setCurrentlyAnalyzing("Analyzing pages...");
     
     try {
-      const response = await fetch('http://localhost:5002/analyze-images', {
+      const response = await fetch(`http://localhost:5002/analyze-images/${fileId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ 
           model_choice: modelChoice,
-          conversation_history: modelChoice === "mini" ? conversationHistory : undefined
+          conversation_history: conversationHistory 
         })
       });
 
       if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Analysis failed:', errorText);
-        setCurrentlyAnalyzing(`Error: ${errorText}`);
-      } else {
-        const data = await response.json();
-        console.log('Got analysis results:', data);
-        setAnalysisResults(data.results);
-        if (data.conversation_history) {
-          setConversationHistory(data.conversation_history);
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      // Group results by page number
+      const groupedResults = data.results.reduce((acc, result) => {
+        const pageIndex = result.page - 1;
+        if (!acc[pageIndex]) {
+          acc[pageIndex] = { 
+            analysis: '',
+            isExpanded: true // Start with all pages expanded
+          };
         }
-        setCurrentlyAnalyzing(null);
-      }
+        acc[pageIndex].analysis += result.analysis + '\n\n';
+        return acc;
+      }, []);
+      
+      setAnalysisResults(groupedResults);
+      setEditableAnalysis(groupedResults.map(r => r.analysis));
+      setCurrentlyAnalyzing(null);
     } catch (error) {
-      if (error.message !== 'Failed to fetch') {  // Ignore connection refused errors
-        console.error('Error during analysis:', error);
-        setCurrentlyAnalyzing(`Error: ${error.message}`);
-      }
+      console.error('Error during analysis:', error);
+      setCurrentlyAnalyzing(`Error: ${error.message}`);
     } finally {
       setIsAnalyzing(false);
     }
+  };
+
+  const togglePageExpansion = (index) => {
+    setAnalysisResults(prev => {
+      const newResults = [...prev];
+      if (newResults[index]) {
+        newResults[index] = {
+          ...newResults[index],
+          isExpanded: !newResults[index].isExpanded
+        };
+      }
+      return newResults;
+    });
   };
 
   const handleClassify = async () => {
@@ -434,12 +398,17 @@ function LocalPage() {
     }
   }, [classificationResults]);
 
-  // Update summary handler
+  // Ensure summary is visible when it's set
   useEffect(() => {
-    if (pdfSummary) {
-      setEditableSummary(pdfSummary);
+    if (summaryContent) {
+      setSummaryVisible(true);
+      console.log('Summary state updated:', {
+        content: summaryContent,
+        isVisible: true,
+        isSummarizing: false
+      });
     }
-  }, [pdfSummary]);
+  }, [summaryContent]);
 
   // Handle text area changes
   const handleAnalysisChange = (index, value) => {
@@ -453,8 +422,7 @@ function LocalPage() {
   };
 
   const handleSummaryChange = (value) => {
-    setEditableSummary(value);
-    setPdfSummary({ summary: value });
+    setSummaryContent(value);
   };
 
   return (
@@ -485,7 +453,7 @@ function LocalPage() {
                   setSelectedFile(null);
                   setPdfUrl(null);
                   setAnalysisResults(null);
-                  setPdfSummary(null);
+                  setSummaryContent('');
                   setUploadError(null);
                   setPageCount(0);
                   setSelectedPages([]);
@@ -538,40 +506,38 @@ function LocalPage() {
           )}
 
           {analysisResults && (
-            <div className="analysis-results">
-              <div 
-                className="result-section-header"
-                onClick={() => setAnalysisVisible(!analysisVisible)}
-              >
-                <h3>Analysis Results</h3>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  style={{ transform: analysisVisible ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                >
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </div>
-              {analysisVisible && analysisResults.map((result, index) => (
+            <>
+              <h3 className="section-header">Analysis Results</h3>
+              {analysisResults.map((result, index) => result && (
                 <div key={index} className="result-item">
-                  <div className="result-section-header">
+                  <div 
+                    className="result-section-header"
+                    onClick={() => togglePageExpansion(index)}
+                  >
                     <h4>Page {index + 1}</h4>
+                    <IoChevronDown 
+                      className="chevron-icon"
+                      style={{ 
+                        transform: result.isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.3s ease'
+                      }}
+                    />
                   </div>
-                  <pre>{result.analysis}</pre>
-                  <textarea
-                    className="editable-area"
-                    value={editableAnalysis[index] || ''}
-                    onChange={(e) => handleAnalysisChange(index, e.target.value)}
-                    spellCheck="false"
-                  />
+                  {result.isExpanded && (
+                    <>
+                      <div className="analysis-text">{result.analysis}</div>
+                      <textarea
+                        className="editable-area"
+                        value={editableAnalysis[index] || ''}
+                        onChange={(e) => handleAnalysisChange(index, e.target.value)}
+                        spellCheck="false"
+                        placeholder="Edit analysis here..."
+                      />
+                    </>
+                  )}
                 </div>
               ))}
-            </div>
+            </>
           )}
 
           {analysisResults && (
@@ -581,18 +547,13 @@ function LocalPage() {
                 onClick={() => setClassificationVisible(!classificationVisible)}
               >
                 <h3>Classification</h3>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  style={{ transform: classificationVisible ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                >
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+                <IoChevronDown 
+                  className="chevron-icon"
+                  style={{ 
+                    transform: classificationVisible ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.3s ease'
+                  }}
+                />
               </div>
               {classificationVisible && (
                 <>
@@ -674,34 +635,53 @@ function LocalPage() {
                 <span>Generating summary...</span>
               </div>
             </div>
-          ) : pdfSummary && (
+          ) : summaryContent && (
             <div className="summary-section">
               <div 
                 className="result-section-header"
                 onClick={() => setSummaryVisible(!summaryVisible)}
               >
-                <h3>PDF Summary</h3>
-                <svg 
-                  className="chevron-icon"
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                  style={{ transform: summaryVisible ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                >
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+                <div className="header-content">
+                  <h3>PDF Summary</h3>
+                  <div className="header-actions">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        generateSummary(fileId);
+                      }}
+                      className="icon-button"
+                      title="Regenerate Summary"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="reset-icon">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                        <path d="M3 3v5h5"></path>
+                      </svg>
+                    </button>
+                    <svg 
+                      className="chevron-icon"
+                      xmlns="http://www.w3.org/2000/svg" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                      style={{ transform: summaryVisible ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                </div>
               </div>
               {summaryVisible && (
-                <textarea
-                  className="editable-area"
-                  value={editableSummary}
-                  onChange={(e) => setEditableSummary(e.target.value)}
-                  spellCheck="false"
-                />
+                <div className="summary-content">
+                  <textarea
+                    className="editable-area"
+                    value={summaryContent}
+                    onChange={(e) => handleSummaryChange(e.target.value)}
+                    spellCheck="false"
+                  />
+                </div>
               )}
             </div>
           )}

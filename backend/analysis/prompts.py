@@ -78,22 +78,23 @@ Belangrijk:
 3. Begin elk leerdoel met een streepje (-) en de exacte code
 4. Gebruik de dimensies (cognitief, conceptueel, procedureel, feitelijk) in je uitleg"""
 
-SUMMARY_PROMPT = """Maak een ZEER BEKNOPTE samenvatting van de volgende lesinhoud in het Nederlands.
-Gebruik maximaal 5 zinnen in totaal.
+SUMMARY_PROMPT = """Je bent een ervaren onderwijsassistent die gespecialiseerd is in het samenvatten van educatieve inhoud.
+Maak een duidelijke en beknopte samenvatting van de volgende les of lessenreeks.
+Focus op de belangrijkste leerdoelen, concepten en vaardigheden die worden behandeld.
 
-Geef je antwoord EXACT in dit formaat (gebruik deze exacte labels):
+LESINHOUD:
+{text}
 
-ONDERWERP: [Eén zin over het hoofdonderwerp]
-VAK: [Naam van het vak]
-JAAR: [Leerjaar]
-LESINHOUD: [2-3 zinnen over de belangrijkste punten]
+Gebruik dit exacte format voor je antwoord:
 
-Voorbeeld:
-ONDERWERP: De Tweede Wereldoorlog in Europa
-VAK: Geschiedenis
-JAAR: 3e jaar
-LESINHOUD: Deze les behandelt de belangrijkste gebeurtenissen van WOII in Europa. De focus ligt op de oorzaken van de oorlog en de impact op de burgerbevolking.
+ONDERWERP:
+[1 zin die het hoofdonderwerp beschrijft]
 
-Hier is de lesinhoud om samen te vatten:
+VAK:
+[Naam van het vak]
 
-{content}""" 
+JAAR:
+[Doelgroep/leerjaar indien vermeld]
+
+LESINHOUD:
+[2-3 zinnen die de belangrijkste inhoud beschrijven]""" 

@@ -1,0 +1,505 @@
+2024-12-27 04:44:34,593 - INFO - Starting FastAPI server...
+2024-12-27 04:56:19,544 - INFO - Starting FastAPI server...
+2024-12-27 04:56:56,670 - INFO - Getting page count for file: THEMA_Evolutie_vd_Mens.pdf
+2024-12-27 04:56:56,672 - INFO - Page count determined: 11 pages
+2024-12-27 04:56:59,388 - INFO - [STEP 1/2] Starting conversion of THEMA_Evolutie_vd_Mens.pdf
+2024-12-27 04:57:00,931 - INFO - [STEP 1/2] Conversion completed: 11 pages processed
+2024-12-27 04:57:02,943 - INFO - [STEP 2/2] Starting analysis with llama model
+2024-12-27 04:57:02,944 - INFO - [STEP 2/2] Found 11 pages to analyze
+2024-12-27 04:57:02,944 - INFO - [PROGRESS] Analyzing page 1/11
+2024-12-27 04:57:02,944 - INFO - Starting analysis with model choice: llama
+2024-12-27 04:57:02,954 - INFO - [LLAMA] Starting analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_1.jpg
+2024-12-27 04:57:02,954 - INFO - Sending request to Llama Vision
+2024-12-27 04:59:28,441 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 04:59:28,441 - INFO - Received response from Llama Vision
+2024-12-27 04:59:28,441 - INFO - [LLAMA] Completed analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_1.jpg
+2024-12-27 04:59:28,442 - INFO - [PROGRESS] Analyzing page 2/11
+2024-12-27 04:59:28,442 - INFO - Starting analysis with model choice: llama
+2024-12-27 04:59:28,443 - INFO - [LLAMA] Starting analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_2.jpg
+2024-12-27 04:59:28,443 - INFO - Sending request to Llama Vision
+2024-12-27 05:01:49,435 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 05:01:49,435 - INFO - Received response from Llama Vision
+2024-12-27 05:01:49,435 - INFO - [LLAMA] Completed analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_2.jpg
+2024-12-27 05:01:49,436 - INFO - [PROGRESS] Analyzing page 3/11
+2024-12-27 05:01:49,437 - INFO - Starting analysis with model choice: llama
+2024-12-27 05:01:49,437 - INFO - [LLAMA] Starting analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_3.jpg
+2024-12-27 05:01:49,438 - INFO - Sending request to Llama Vision
+2024-12-27 05:04:19,057 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 05:04:19,057 - INFO - Received response from Llama Vision
+2024-12-27 05:04:19,057 - INFO - [LLAMA] Completed analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_3.jpg
+2024-12-27 05:04:19,058 - INFO - [PROGRESS] Analyzing page 4/11
+2024-12-27 05:04:19,059 - INFO - Starting analysis with model choice: llama
+2024-12-27 05:04:19,059 - INFO - [LLAMA] Starting analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_4.jpg
+2024-12-27 05:04:19,059 - INFO - Sending request to Llama Vision
+2024-12-27 05:06:19,395 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 05:06:19,395 - INFO - Received response from Llama Vision
+2024-12-27 05:06:19,395 - INFO - [LLAMA] Completed analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_4.jpg
+2024-12-27 05:06:19,396 - INFO - [PROGRESS] Analyzing page 5/11
+2024-12-27 05:06:19,396 - INFO - Starting analysis with model choice: llama
+2024-12-27 05:06:19,397 - INFO - [LLAMA] Starting analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_5.jpg
+2024-12-27 05:06:19,397 - INFO - Sending request to Llama Vision
+2024-12-27 05:08:33,479 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 05:08:33,479 - INFO - Received response from Llama Vision
+2024-12-27 05:08:33,480 - INFO - [LLAMA] Completed analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_5.jpg
+2024-12-27 05:08:33,481 - INFO - [PROGRESS] Analyzing page 6/11
+2024-12-27 05:08:33,481 - INFO - Starting analysis with model choice: llama
+2024-12-27 05:08:33,481 - INFO - [LLAMA] Starting analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_6.jpg
+2024-12-27 05:08:33,482 - INFO - Sending request to Llama Vision
+2024-12-27 05:10:58,066 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2024-12-27 05:10:58,067 - ERROR - Error analyzing image with Llama: error reading llm response: read tcp 127.0.0.1:50696->127.0.0.1:50694: wsarecv: De externe host heeft een verbinding verbroken.
+2024-12-27 05:10:58,079 - INFO - [PROGRESS] Analyzing page 7/11
+2024-12-27 05:10:58,079 - INFO - Starting analysis with model choice: llama
+2024-12-27 05:10:58,079 - INFO - [LLAMA] Starting analysis of C:\code\Reacttest\leerplannentest\backend\converted_images\THEMA_Evolutie_vd_Mens\page_7.jpg
+2024-12-27 05:10:58,080 - INFO - Sending request to Llama Vision
+2024-12-27 05:12:50,353 - INFO - Starting FastAPI server...
+2024-12-27 14:45:31,947 - INFO - Received file upload request: THEMA_Evolutie_vd_Mens.pdf
+2024-12-27 14:45:31,948 - INFO - Cleaning up old files...
+2024-12-27 14:45:31,957 - INFO - Reading PDF file...
+2024-12-27 14:45:31,958 - INFO - Converting 11 pages...
+2024-12-27 14:45:33,475 - INFO - Successfully converted 11 pages
+2024-12-27 14:47:07,639 - INFO - Starting analysis with model: mini
+2024-12-27 14:47:07,640 - INFO - Found 11 images to analyze
+2024-12-27 14:47:07,640 - INFO - Processing page 1 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:47:07,640 - INFO - Loaded text content for page 1 (330 chars)
+2024-12-27 14:47:07,640 - INFO - Starting analysis of page 1 with mini
+2024-12-27 14:47:07,640 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:47:07,646 - INFO - Image encoded to base64
+2024-12-27 14:47:07,947 - INFO - OpenAI client initialized
+2024-12-27 14:47:07,947 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:47:14,605 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:47:14,610 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:47:14,610 - INFO - Token usage - Total: 1059, Prompt: 710, Completion: 349, Cached: 0
+2024-12-27 14:47:14,624 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:47:14,624 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:47:14,624 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:47:14,624 - INFO - Completed analysis of page 1
+2024-12-27 14:47:14,625 - INFO - Saved analysis for page 1
+2024-12-27 14:47:14,625 - INFO - Processing page 2 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:47:14,625 - INFO - Loaded text content for page 2 (1093 chars)
+2024-12-27 14:47:14,625 - INFO - Starting analysis of page 2 with mini
+2024-12-27 14:47:14,625 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:47:14,632 - INFO - Image encoded to base64
+2024-12-27 14:47:14,924 - INFO - OpenAI client initialized
+2024-12-27 14:47:14,924 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:47:14,925 - INFO - History message 1: role=user, content_length=247130
+2024-12-27 14:47:14,925 - INFO - History message 2: role=assistant, content_length=1528
+2024-12-27 14:47:14,925 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:47:23,122 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:47:23,123 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:47:23,124 - INFO - Token usage - Total: 1850, Prompt: 1445, Completion: 405, Cached: 0
+2024-12-27 14:47:23,129 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:47:23,129 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:47:23,129 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:47:23,129 - INFO - Completed analysis of page 2
+2024-12-27 14:47:23,130 - INFO - Saved analysis for page 2
+2024-12-27 14:47:23,130 - INFO - Processing page 3 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:47:23,130 - INFO - Loaded text content for page 3 (2018 chars)
+2024-12-27 14:47:23,130 - INFO - Starting analysis of page 3 with mini
+2024-12-27 14:47:23,130 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:47:23,140 - INFO - Image encoded to base64
+2024-12-27 14:47:23,439 - INFO - OpenAI client initialized
+2024-12-27 14:47:23,439 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:47:23,441 - INFO - History message 1: role=user, content_length=502951
+2024-12-27 14:47:23,441 - INFO - History message 2: role=assistant, content_length=1795
+2024-12-27 14:47:23,441 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:47:33,170 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:47:33,171 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:47:33,171 - INFO - Token usage - Total: 2296, Prompt: 1847, Completion: 449, Cached: 0
+2024-12-27 14:47:33,177 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:47:33,177 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:47:33,177 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:47:33,178 - INFO - Completed analysis of page 3
+2024-12-27 14:47:33,179 - INFO - Saved analysis for page 3
+2024-12-27 14:47:33,179 - INFO - Processing page 4 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:47:33,179 - INFO - Loaded text content for page 4 (1197 chars)
+2024-12-27 14:47:33,179 - INFO - Starting analysis of page 4 with mini
+2024-12-27 14:47:33,179 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:47:33,186 - INFO - Image encoded to base64
+2024-12-27 14:47:33,474 - INFO - OpenAI client initialized
+2024-12-27 14:47:33,474 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:47:33,476 - INFO - History message 1: role=user, content_length=473604
+2024-12-27 14:47:33,476 - INFO - History message 2: role=assistant, content_length=2133
+2024-12-27 14:47:33,476 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:47:42,182 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:47:42,184 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:47:42,184 - INFO - Token usage - Total: 7608, Prompt: 7171, Completion: 437, Cached: 0
+2024-12-27 14:47:42,191 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:47:42,191 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:47:42,192 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:47:42,192 - INFO - Completed analysis of page 4
+2024-12-27 14:47:42,193 - INFO - Saved analysis for page 4
+2024-12-27 14:47:42,193 - INFO - Processing page 5 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:47:42,193 - INFO - Loaded text content for page 5 (908 chars)
+2024-12-27 14:47:42,193 - INFO - Starting analysis of page 5 with mini
+2024-12-27 14:47:42,193 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:47:42,200 - INFO - Image encoded to base64
+2024-12-27 14:47:42,486 - INFO - OpenAI client initialized
+2024-12-27 14:47:42,486 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:47:42,488 - INFO - History message 1: role=user, content_length=453324
+2024-12-27 14:47:42,488 - INFO - History message 2: role=assistant, content_length=1964
+2024-12-27 14:47:42,488 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:47:52,822 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:47:52,823 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:47:52,823 - INFO - Token usage - Total: 2069, Prompt: 1621, Completion: 448, Cached: 0
+2024-12-27 14:47:52,826 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:47:52,826 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:47:52,826 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:47:52,826 - INFO - Completed analysis of page 5
+2024-12-27 14:47:52,827 - INFO - Saved analysis for page 5
+2024-12-27 14:47:52,827 - INFO - Processing page 6 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:47:52,827 - INFO - Loaded text content for page 6 (832 chars)
+2024-12-27 14:47:52,827 - INFO - Starting analysis of page 6 with mini
+2024-12-27 14:47:52,827 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:47:52,836 - INFO - Image encoded to base64
+2024-12-27 14:47:53,166 - INFO - OpenAI client initialized
+2024-12-27 14:47:53,166 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:47:53,168 - INFO - History message 1: role=user, content_length=386736
+2024-12-27 14:47:53,168 - INFO - History message 2: role=assistant, content_length=2117
+2024-12-27 14:47:53,168 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:48:03,249 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:48:03,250 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:48:03,250 - INFO - Token usage - Total: 2008, Prompt: 1541, Completion: 467, Cached: 0
+2024-12-27 14:48:03,254 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:48:03,254 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:48:03,254 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:48:03,254 - INFO - Completed analysis of page 6
+2024-12-27 14:48:03,255 - INFO - Saved analysis for page 6
+2024-12-27 14:48:03,255 - INFO - Processing page 7 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:48:03,255 - INFO - Loaded text content for page 7 (725 chars)
+2024-12-27 14:48:03,255 - INFO - Starting analysis of page 7 with mini
+2024-12-27 14:48:03,255 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:48:03,265 - INFO - Image encoded to base64
+2024-12-27 14:48:03,555 - INFO - OpenAI client initialized
+2024-12-27 14:48:03,556 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:48:03,557 - INFO - History message 1: role=user, content_length=435347
+2024-12-27 14:48:03,557 - INFO - History message 2: role=assistant, content_length=2221
+2024-12-27 14:48:03,557 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:48:15,553 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:48:15,554 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:48:15,555 - INFO - Token usage - Total: 2043, Prompt: 1559, Completion: 484, Cached: 0
+2024-12-27 14:48:15,559 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:48:15,560 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:48:15,560 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:48:15,560 - INFO - Completed analysis of page 7
+2024-12-27 14:48:15,560 - INFO - Saved analysis for page 7
+2024-12-27 14:48:15,560 - INFO - Processing page 8 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:48:15,561 - INFO - Loaded text content for page 8 (2062 chars)
+2024-12-27 14:48:15,561 - INFO - Starting analysis of page 8 with mini
+2024-12-27 14:48:15,561 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:48:15,571 - INFO - Image encoded to base64
+2024-12-27 14:48:15,854 - INFO - OpenAI client initialized
+2024-12-27 14:48:15,856 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:48:15,858 - INFO - History message 1: role=user, content_length=517019
+2024-12-27 14:48:15,858 - INFO - History message 2: role=assistant, content_length=2250
+2024-12-27 14:48:15,858 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:48:26,264 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:48:26,265 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:48:26,266 - INFO - Token usage - Total: 2377, Prompt: 1881, Completion: 496, Cached: 0
+2024-12-27 14:48:26,274 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:48:26,274 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:48:26,274 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:48:26,275 - INFO - Completed analysis of page 8
+2024-12-27 14:48:26,275 - INFO - Saved analysis for page 8
+2024-12-27 14:48:26,276 - INFO - Processing page 9 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:48:26,276 - INFO - Loaded text content for page 9 (1251 chars)
+2024-12-27 14:48:26,276 - INFO - Starting analysis of page 9 with mini
+2024-12-27 14:48:26,276 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:48:26,288 - INFO - Image encoded to base64
+2024-12-27 14:48:26,582 - INFO - OpenAI client initialized
+2024-12-27 14:48:26,582 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:48:26,585 - INFO - History message 1: role=user, content_length=534794
+2024-12-27 14:48:26,585 - INFO - History message 2: role=assistant, content_length=2335
+2024-12-27 14:48:26,586 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:48:57,939 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:48:57,941 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:48:57,941 - INFO - Token usage - Total: 2498, Prompt: 2010, Completion: 488, Cached: 0
+2024-12-27 14:48:57,943 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:48:57,943 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:48:57,943 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:48:57,943 - INFO - Completed analysis of page 9
+2024-12-27 14:48:57,944 - INFO - Saved analysis for page 9
+2024-12-27 14:48:57,944 - INFO - Processing page 10 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:48:57,944 - INFO - Loaded text content for page 10 (12 chars)
+2024-12-27 14:48:57,944 - INFO - Starting analysis of page 10 with mini
+2024-12-27 14:48:57,944 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:48:57,953 - INFO - Image encoded to base64
+2024-12-27 14:48:58,245 - INFO - OpenAI client initialized
+2024-12-27 14:48:58,245 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:48:58,246 - INFO - History message 1: role=user, content_length=374948
+2024-12-27 14:48:58,247 - INFO - History message 2: role=assistant, content_length=2294
+2024-12-27 14:48:58,247 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:49:06,009 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:49:06,010 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:49:06,010 - INFO - Token usage - Total: 1709, Prompt: 1509, Completion: 200, Cached: 0
+2024-12-27 14:49:06,011 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:49:06,011 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:49:06,011 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:49:06,011 - INFO - Completed analysis of page 10
+2024-12-27 14:49:06,012 - INFO - Saved analysis for page 10
+2024-12-27 14:49:06,012 - INFO - Processing page 11 from THEMA_Evolutie_vd_Mens
+2024-12-27 14:49:06,012 - INFO - Loaded text content for page 11 (1745 chars)
+2024-12-27 14:49:06,012 - INFO - Starting analysis of page 11 with mini
+2024-12-27 14:49:06,012 - INFO - Starting GPT-4o Mini analysis
+2024-12-27 14:49:06,023 - INFO - Image encoded to base64
+2024-12-27 14:49:06,316 - INFO - OpenAI client initialized
+2024-12-27 14:49:06,316 - INFO - Conversation history has 2 messages from previous page
+2024-12-27 14:49:06,316 - INFO - History message 1: role=user, content_length=33120
+2024-12-27 14:49:06,316 - INFO - History message 2: role=assistant, content_length=946
+2024-12-27 14:49:06,316 - INFO - Sending request to GPT-4o Mini
+2024-12-27 14:49:17,477 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2024-12-27 14:49:17,478 - INFO - Received response from GPT-4o Mini
+2024-12-27 14:49:17,478 - INFO - Token usage - Total: 1815, Prompt: 1434, Completion: 381, Cached: 0
+2024-12-27 14:49:17,482 - INFO - Conversation logged to: C:\code\Reacttest\leerplannentest\backend\conversations\conversation_history.txt
+2024-12-27 14:49:17,483 - INFO - Updated conversation history - now has 2 messages
+2024-12-27 14:49:17,483 - INFO - History stored in memory at id: 1888906734208
+2024-12-27 14:49:17,483 - INFO - Completed analysis of page 11
+2024-12-27 14:49:17,483 - INFO - Saved analysis for page 11
+2024-12-27 14:49:17,484 - INFO - Saved combined analysis for THEMA_Evolutie_vd_Mens
+2024-12-27 14:49:17,484 - INFO - Analysis completed successfully
+2024-12-27 15:55:20,505 - INFO - Starting analysis with model: llama
+2024-12-27 15:55:20,506 - INFO - Found 11 images to analyze
+2024-12-27 15:55:20,506 - INFO - Processing page 1 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:55:20,506 - INFO - Loaded text content for page 1 (330 chars)
+2024-12-27 15:55:20,506 - INFO - Starting analysis of page 1 with llama
+2024-12-27 15:55:20,506 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:55:20,506 - INFO - Starting Llama Vision analysis
+2024-12-27 15:55:20,506 - INFO - Sending request to Llama Vision
+2024-12-27 15:55:30,182 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:55:30,182 - INFO - Received response from Llama Vision
+2024-12-27 15:55:30,182 - INFO - Completed analysis of page 1
+2024-12-27 15:55:30,183 - INFO - Saved analysis for page 1
+2024-12-27 15:55:30,184 - INFO - Processing page 2 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:55:30,184 - INFO - Loaded text content for page 2 (1093 chars)
+2024-12-27 15:55:30,184 - INFO - Starting analysis of page 2 with llama
+2024-12-27 15:55:30,184 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:55:30,185 - INFO - Starting Llama Vision analysis
+2024-12-27 15:55:30,185 - INFO - Sending request to Llama Vision
+2024-12-27 15:55:40,816 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:55:40,816 - INFO - Received response from Llama Vision
+2024-12-27 15:55:40,816 - INFO - Completed analysis of page 2
+2024-12-27 15:55:40,817 - INFO - Saved analysis for page 2
+2024-12-27 15:55:40,817 - INFO - Processing page 3 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:55:40,817 - INFO - Loaded text content for page 3 (2018 chars)
+2024-12-27 15:55:40,817 - INFO - Starting analysis of page 3 with llama
+2024-12-27 15:55:40,818 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:55:40,818 - INFO - Starting Llama Vision analysis
+2024-12-27 15:55:40,818 - INFO - Sending request to Llama Vision
+2024-12-27 15:55:49,053 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:55:49,053 - INFO - Received response from Llama Vision
+2024-12-27 15:55:49,053 - INFO - Completed analysis of page 3
+2024-12-27 15:55:49,054 - INFO - Saved analysis for page 3
+2024-12-27 15:55:49,054 - INFO - Processing page 4 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:55:49,055 - INFO - Loaded text content for page 4 (1197 chars)
+2024-12-27 15:55:49,055 - INFO - Starting analysis of page 4 with llama
+2024-12-27 15:55:49,055 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:55:49,055 - INFO - Starting Llama Vision analysis
+2024-12-27 15:55:49,055 - INFO - Sending request to Llama Vision
+2024-12-27 15:55:57,907 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:55:57,908 - INFO - Received response from Llama Vision
+2024-12-27 15:55:57,908 - INFO - Completed analysis of page 4
+2024-12-27 15:55:57,909 - INFO - Saved analysis for page 4
+2024-12-27 15:55:57,909 - INFO - Processing page 5 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:55:57,909 - INFO - Loaded text content for page 5 (908 chars)
+2024-12-27 15:55:57,909 - INFO - Starting analysis of page 5 with llama
+2024-12-27 15:55:57,909 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:55:57,909 - INFO - Starting Llama Vision analysis
+2024-12-27 15:55:57,910 - INFO - Sending request to Llama Vision
+2024-12-27 15:56:04,445 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:56:04,445 - INFO - Received response from Llama Vision
+2024-12-27 15:56:04,445 - INFO - Completed analysis of page 5
+2024-12-27 15:56:04,446 - INFO - Saved analysis for page 5
+2024-12-27 15:56:04,446 - INFO - Processing page 6 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:56:04,446 - INFO - Loaded text content for page 6 (832 chars)
+2024-12-27 15:56:04,446 - INFO - Starting analysis of page 6 with llama
+2024-12-27 15:56:04,446 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:56:04,447 - INFO - Starting Llama Vision analysis
+2024-12-27 15:56:04,447 - INFO - Sending request to Llama Vision
+2024-12-27 15:56:11,650 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:56:11,651 - INFO - Received response from Llama Vision
+2024-12-27 15:56:11,651 - INFO - Completed analysis of page 6
+2024-12-27 15:56:11,652 - INFO - Saved analysis for page 6
+2024-12-27 15:56:11,652 - INFO - Processing page 7 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:56:11,652 - INFO - Loaded text content for page 7 (725 chars)
+2024-12-27 15:56:11,652 - INFO - Starting analysis of page 7 with llama
+2024-12-27 15:56:11,652 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:56:11,653 - INFO - Starting Llama Vision analysis
+2024-12-27 15:56:11,653 - INFO - Sending request to Llama Vision
+2024-12-27 15:56:25,914 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:56:25,914 - INFO - Received response from Llama Vision
+2024-12-27 15:56:25,915 - INFO - Completed analysis of page 7
+2024-12-27 15:56:25,915 - INFO - Saved analysis for page 7
+2024-12-27 15:56:25,916 - INFO - Processing page 8 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:56:25,916 - INFO - Loaded text content for page 8 (2062 chars)
+2024-12-27 15:56:25,916 - INFO - Starting analysis of page 8 with llama
+2024-12-27 15:56:25,916 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:56:25,916 - INFO - Starting Llama Vision analysis
+2024-12-27 15:56:25,916 - INFO - Sending request to Llama Vision
+2024-12-27 15:56:32,336 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:56:32,336 - INFO - Received response from Llama Vision
+2024-12-27 15:56:32,336 - INFO - Completed analysis of page 8
+2024-12-27 15:56:32,337 - INFO - Saved analysis for page 8
+2024-12-27 15:56:32,337 - INFO - Processing page 9 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:56:32,337 - INFO - Loaded text content for page 9 (1251 chars)
+2024-12-27 15:56:32,337 - INFO - Starting analysis of page 9 with llama
+2024-12-27 15:56:32,337 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:56:32,338 - INFO - Starting Llama Vision analysis
+2024-12-27 15:56:32,338 - INFO - Sending request to Llama Vision
+2024-12-27 15:56:40,757 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:56:40,757 - INFO - Received response from Llama Vision
+2024-12-27 15:56:40,757 - INFO - Completed analysis of page 9
+2024-12-27 15:56:40,758 - INFO - Saved analysis for page 9
+2024-12-27 15:56:40,758 - INFO - Processing page 10 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:56:40,758 - INFO - Loaded text content for page 10 (12 chars)
+2024-12-27 15:56:40,758 - INFO - Starting analysis of page 10 with llama
+2024-12-27 15:56:40,758 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:56:40,758 - INFO - Starting Llama Vision analysis
+2024-12-27 15:56:40,758 - INFO - Sending request to Llama Vision
+2024-12-27 15:56:44,935 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:56:44,935 - INFO - Received response from Llama Vision
+2024-12-27 15:56:44,935 - INFO - Completed analysis of page 10
+2024-12-27 15:56:44,936 - INFO - Saved analysis for page 10
+2024-12-27 15:56:44,936 - INFO - Processing page 11 from THEMA_Evolutie_vd_Mens
+2024-12-27 15:56:44,936 - INFO - Loaded text content for page 11 (1745 chars)
+2024-12-27 15:56:44,936 - INFO - Starting analysis of page 11 with llama
+2024-12-27 15:56:44,936 - INFO - Starting analysis with model choice: llama
+2024-12-27 15:56:44,937 - INFO - Starting Llama Vision analysis
+2024-12-27 15:56:44,937 - INFO - Sending request to Llama Vision
+2024-12-27 15:56:55,982 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:56:55,982 - INFO - Received response from Llama Vision
+2024-12-27 15:56:55,982 - INFO - Completed analysis of page 11
+2024-12-27 15:56:55,983 - INFO - Saved analysis for page 11
+2024-12-27 15:56:55,984 - INFO - Saved combined analysis for THEMA_Evolutie_vd_Mens
+2024-12-27 15:56:55,984 - INFO - Analysis completed successfully
+2024-12-27 15:59:03,710 - INFO - Starting classification with model: mistral-nemo
+2024-12-27 15:59:10,083 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 15:59:10,083 - INFO - Received classification response
+2024-12-27 15:59:47,212 - INFO - Received file upload request: THEMA_Evolutie_vd_Mens.pdf
+2024-12-27 15:59:47,212 - INFO - Cleaning up old files...
+2024-12-27 15:59:47,223 - INFO - Reading PDF file...
+2024-12-27 15:59:47,224 - INFO - Converting 11 pages...
+2024-12-27 15:59:48,762 - INFO - Successfully converted 11 pages
+2024-12-27 16:07:24,514 - INFO - Received file upload request: THEMA_Evolutie_vd_Mens.pdf
+2024-12-27 16:07:24,514 - INFO - Cleaning up old files...
+2024-12-27 16:07:24,522 - INFO - Reading PDF file...
+2024-12-27 16:07:24,523 - INFO - Converting 11 pages...
+2024-12-27 16:07:26,030 - INFO - Successfully converted 11 pages
+2024-12-27 16:07:27,534 - INFO - Starting analysis with model: llama
+2024-12-27 16:07:27,535 - INFO - Found 11 images to analyze
+2024-12-27 16:07:27,535 - INFO - Processing page 1 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:07:27,535 - INFO - Loaded text content for page 1 (330 chars)
+2024-12-27 16:07:27,535 - INFO - Starting analysis of page 1 with llama
+2024-12-27 16:07:27,535 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:07:27,535 - INFO - Starting Llama Vision analysis
+2024-12-27 16:07:27,536 - INFO - Sending request to Llama Vision
+2024-12-27 16:07:39,365 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:07:39,365 - INFO - Received response from Llama Vision
+2024-12-27 16:07:39,365 - INFO - Completed analysis of page 1
+2024-12-27 16:07:39,366 - INFO - Saved analysis for page 1
+2024-12-27 16:07:39,366 - INFO - Processing page 2 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:07:39,366 - INFO - Loaded text content for page 2 (1093 chars)
+2024-12-27 16:07:39,366 - INFO - Starting analysis of page 2 with llama
+2024-12-27 16:07:39,366 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:07:39,368 - INFO - Starting Llama Vision analysis
+2024-12-27 16:07:39,368 - INFO - Sending request to Llama Vision
+2024-12-27 16:07:46,708 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:07:46,708 - INFO - Received response from Llama Vision
+2024-12-27 16:07:46,708 - INFO - Completed analysis of page 2
+2024-12-27 16:07:46,709 - INFO - Saved analysis for page 2
+2024-12-27 16:07:46,709 - INFO - Processing page 3 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:07:46,709 - INFO - Loaded text content for page 3 (2018 chars)
+2024-12-27 16:07:46,709 - INFO - Starting analysis of page 3 with llama
+2024-12-27 16:07:46,709 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:07:46,710 - INFO - Starting Llama Vision analysis
+2024-12-27 16:07:46,710 - INFO - Sending request to Llama Vision
+2024-12-27 16:07:55,970 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:07:55,970 - INFO - Received response from Llama Vision
+2024-12-27 16:07:55,970 - INFO - Completed analysis of page 3
+2024-12-27 16:07:55,980 - INFO - Saved analysis for page 3
+2024-12-27 16:07:55,980 - INFO - Processing page 4 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:07:55,980 - INFO - Loaded text content for page 4 (1197 chars)
+2024-12-27 16:07:55,981 - INFO - Starting analysis of page 4 with llama
+2024-12-27 16:07:55,981 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:07:55,981 - INFO - Starting Llama Vision analysis
+2024-12-27 16:07:55,981 - INFO - Sending request to Llama Vision
+2024-12-27 16:08:04,688 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:08:04,688 - INFO - Received response from Llama Vision
+2024-12-27 16:08:04,688 - INFO - Completed analysis of page 4
+2024-12-27 16:08:04,689 - INFO - Saved analysis for page 4
+2024-12-27 16:08:04,689 - INFO - Processing page 5 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:08:04,689 - INFO - Loaded text content for page 5 (908 chars)
+2024-12-27 16:08:04,689 - INFO - Starting analysis of page 5 with llama
+2024-12-27 16:08:04,690 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:08:04,690 - INFO - Starting Llama Vision analysis
+2024-12-27 16:08:04,690 - INFO - Sending request to Llama Vision
+2024-12-27 16:08:14,147 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:08:14,147 - INFO - Received response from Llama Vision
+2024-12-27 16:08:14,147 - INFO - Completed analysis of page 5
+2024-12-27 16:08:14,148 - INFO - Saved analysis for page 5
+2024-12-27 16:08:14,148 - INFO - Processing page 6 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:08:14,148 - INFO - Loaded text content for page 6 (832 chars)
+2024-12-27 16:08:14,148 - INFO - Starting analysis of page 6 with llama
+2024-12-27 16:08:14,148 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:08:14,149 - INFO - Starting Llama Vision analysis
+2024-12-27 16:08:14,149 - INFO - Sending request to Llama Vision
+2024-12-27 16:08:23,425 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:08:23,425 - INFO - Received response from Llama Vision
+2024-12-27 16:08:23,425 - INFO - Completed analysis of page 6
+2024-12-27 16:08:23,426 - INFO - Saved analysis for page 6
+2024-12-27 16:08:23,426 - INFO - Processing page 7 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:08:23,426 - INFO - Loaded text content for page 7 (725 chars)
+2024-12-27 16:08:23,426 - INFO - Starting analysis of page 7 with llama
+2024-12-27 16:08:23,426 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:08:23,426 - INFO - Starting Llama Vision analysis
+2024-12-27 16:08:23,426 - INFO - Sending request to Llama Vision
+2024-12-27 16:08:31,353 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:08:31,353 - INFO - Received response from Llama Vision
+2024-12-27 16:08:31,353 - INFO - Completed analysis of page 7
+2024-12-27 16:08:31,354 - INFO - Saved analysis for page 7
+2024-12-27 16:08:31,354 - INFO - Processing page 8 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:08:31,354 - INFO - Loaded text content for page 8 (2062 chars)
+2024-12-27 16:08:31,354 - INFO - Starting analysis of page 8 with llama
+2024-12-27 16:08:31,354 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:08:31,355 - INFO - Starting Llama Vision analysis
+2024-12-27 16:08:31,355 - INFO - Sending request to Llama Vision
+2024-12-27 16:08:38,261 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:08:38,261 - INFO - Received response from Llama Vision
+2024-12-27 16:08:38,261 - INFO - Completed analysis of page 8
+2024-12-27 16:08:38,262 - INFO - Saved analysis for page 8
+2024-12-27 16:08:38,262 - INFO - Processing page 9 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:08:38,262 - INFO - Loaded text content for page 9 (1251 chars)
+2024-12-27 16:08:38,262 - INFO - Starting analysis of page 9 with llama
+2024-12-27 16:08:38,263 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:08:38,263 - INFO - Starting Llama Vision analysis
+2024-12-27 16:08:38,264 - INFO - Sending request to Llama Vision
+2024-12-27 16:08:45,817 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:08:45,817 - INFO - Received response from Llama Vision
+2024-12-27 16:08:45,817 - INFO - Completed analysis of page 9
+2024-12-27 16:08:45,818 - INFO - Saved analysis for page 9
+2024-12-27 16:08:45,818 - INFO - Processing page 10 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:08:45,818 - INFO - Loaded text content for page 10 (12 chars)
+2024-12-27 16:08:45,818 - INFO - Starting analysis of page 10 with llama
+2024-12-27 16:08:45,819 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:08:45,819 - INFO - Starting Llama Vision analysis
+2024-12-27 16:08:45,819 - INFO - Sending request to Llama Vision
+2024-12-27 16:08:49,690 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:08:49,690 - INFO - Received response from Llama Vision
+2024-12-27 16:08:49,690 - INFO - Completed analysis of page 10
+2024-12-27 16:08:49,691 - INFO - Saved analysis for page 10
+2024-12-27 16:08:49,691 - INFO - Processing page 11 from THEMA_Evolutie_vd_Mens
+2024-12-27 16:08:49,691 - INFO - Loaded text content for page 11 (1745 chars)
+2024-12-27 16:08:49,691 - INFO - Starting analysis of page 11 with llama
+2024-12-27 16:08:49,691 - INFO - Starting analysis with model choice: llama
+2024-12-27 16:08:49,692 - INFO - Starting Llama Vision analysis
+2024-12-27 16:08:49,692 - INFO - Sending request to Llama Vision
+2024-12-27 16:08:58,961 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:08:58,962 - INFO - Received response from Llama Vision
+2024-12-27 16:08:58,962 - INFO - Completed analysis of page 11
+2024-12-27 16:08:58,963 - INFO - Saved analysis for page 11
+2024-12-27 16:08:58,964 - INFO - Saved combined analysis for THEMA_Evolutie_vd_Mens
+2024-12-27 16:08:58,964 - INFO - Analysis completed successfully
+2024-12-27 16:09:07,098 - INFO - Starting classification with model: bramvanroy/geitje-7b-ultra
+2024-12-27 16:09:07,113 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+2024-12-27 16:09:07,114 - ERROR - Error in classify_with_ollama: model "bramvanroy/geitje-7b-ultra" not found, try pulling it first
+2024-12-27 16:10:26,526 - INFO - Starting classification with model: mistral-nemo
+2024-12-27 16:10:31,887 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2024-12-27 16:10:31,888 - INFO - Received classification response

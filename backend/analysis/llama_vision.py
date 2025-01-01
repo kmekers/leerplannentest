@@ -5,11 +5,12 @@ import logging
 import asyncio
 import ollama
 from openai import OpenAI
-from .prompts import MINI_VISION_PROMPT, VISION_ANALYSIS_PROMPT, CLASSIFICATION_PROMPT, SUMMARY_PROMPT
+from .prompts import MINI_VISION_PROMPT, VISION_ANALYSIS_PROMPT, CLASSIFICATION_PROMPT
 import socket
 from dotenv import load_dotenv
 from datetime import datetime
 import requests
+from .ollama_utils import make_ollama_request
 
 # Load environment variables
 load_dotenv()
@@ -195,7 +196,7 @@ Geef je analyse in bovenstaand format. Wees exact en feitelijk.'''
             messages=messages,
             options={
                 "temperature": 0.5,
-                "num_predict": 1500,
+                "num_predict": 40000,
                 "top_k": 40,
                 "top_p": 0.6
             }
@@ -283,69 +284,4 @@ async def classify_with_ollama(content, goals=None, model_choice="mistral-nemo",
     except Exception as e:
         error_msg = f"Error in classification: {str(e)}"
         logging.error(error_msg)
-        return error_msg
-
-async def summarize_with_ollama(content, model="mistral-nemo"):
-    """Generate a summary of the content using Ollama."""
-    logging.info(f"Starting summarization with model: {model}")
-    
-    try:
-        if not is_ollama_running():
-            raise Exception("Ollama server is not running")
-
-        prompt = SUMMARY_PROMPT.format(content=content)
-        
-        response = ollama.chat(
-            model=model,
-            messages=[{"role": "user", "content": prompt}],
-            options={
-                "temperature": 0.3,
-                "num_predict": 2000,
-                "repeat_penalty": 1.2
-            }
-        )
-        
-        summary = response["message"]["content"].strip()
-        return {"summary": summary}
-
-    except Exception as e:
-        logging.error(f"Error during request: {str(e)}")
-        raise
-
-async def make_ollama_request(prompt, model_choice):
-    """Make a request to the Ollama API with error handling and retries"""
-    import ollama
-    import asyncio
-    from tenacity import retry, stop_after_attempt, wait_exponential
-    
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
-    async def _make_request():
-        try:
-            response = ollama.chat(
-                model=model_choice,
-                messages=[{
-                    'role': 'user',
-                    'content': prompt
-                }],
-                options={
-                    "temperature": 0.7,
-                    "num_predict": 1000,
-                    "top_k": 40,
-                    "top_p": 0.9
-                }
-            )
-            
-            if not response or 'message' not in response or 'content' not in response['message']:
-                raise ValueError("Invalid response structure from Ollama")
-                
-            return response['message']['content']
-            
-        except Exception as e:
-            logging.error(f"Error in Ollama request: {str(e)}")
-            raise
-            
-    try:
-        return await _make_request()
-    except Exception as e:
-        logging.error(f"All retries failed for Ollama request: {str(e)}")
-        raise 
+        return error_msg 

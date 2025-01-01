@@ -1,0 +1,5 @@
+2024-12-26 22:41:51,722 - INFO - ==================================================
+2024-12-26 22:41:51,723 - INFO - Starting PDF Conversion Service
+2024-12-26 22:41:51,723 - INFO - Current working directory: C:\code\Reacttest\leerplannentest\backend
+2024-12-26 22:41:51,733 - INFO - Images will be stored in: C:\code\Reacttest\leerplannentest\backend\converted_images
+2024-12-26 22:41:51,761 - INFO - Starting FastAPI server
